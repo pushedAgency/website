@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+export const runtime = 'nodejs'; // 👈 Asegura que se use Node.js
+
 export async function GET(req) {
   try {
     const directoryPath = path.join(process.cwd(), 'public', '_next-video');

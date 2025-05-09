@@ -1,16 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import ButtonComponentLine from "@/app/components/Main/ButtonComponentLine/ButtonComponentLine";
-import VideoComponentLine from "@/app/components/Main/VideoComponentLine/VideoComponentLine";
 import MuxPlayer from "@mux/mux-player-react";
 
-const DataDisplayed = ({ data, title, active }) => {
+const DataDisplayed = ({ data, title }) => {
   return (
     <section>
       <section className="headerSection paddingSection">
-        <h1 className="font-extrabold text-4xl">📚 {title[active]}</h1>
+        <h1 className="font-extrabold text-4xl">📚 {title}</h1>
       </section>
 
       <section className="gridContainer">
@@ -21,28 +19,13 @@ const DataDisplayed = ({ data, title, active }) => {
             Parrafo breve de descripción de contenido lorem ipsum bla bla bla.
           </p>
 
-          {data[title[active]]?.map((videoData, index) => (
+          {data?.map((videoData, index) => (
             <div key={index}>
-              <ButtonComponentLine
-                title={videoData.filename}
-              ></ButtonComponentLine>
+              <ButtonComponentLine title={videoData.filename} />
               <hr />
             </div>
           ))}
         </div>
-
-        {/*
-        <div className="paddingSection videoColumn col-span-2">
-          {videos.map((video, index) => (
-            <VideoComponentLine
-              key={index}
-              title={video.title}
-              duration={video.duration}
-              description={video.description}
-            />
-          ))}
-        </div>
-         */}
 
         <div className="paddingSection videoParagrapgh">
           <MuxPlayer
