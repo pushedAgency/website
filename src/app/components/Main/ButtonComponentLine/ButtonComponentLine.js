@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-const ButtonComponentLine = () => {
+const ButtonComponentLine = ({title}) => {
   return (
-    <a className="mt-2 mb-2 gap-4 flex w-fit buttonComponentLine" href="">
+    <Link className="mt-2 mb-2 gap-4 flex w-fit buttonComponentLine" href={""}>
       <Image
         src={"/images/IconPlayButton.svg"}
         alt="Icon Play Button"
@@ -11,8 +12,8 @@ const ButtonComponentLine = () => {
         height={20}
         className=""
       />
-      <p className="text-2xl">Título de video 1</p>
-    </a>
+      <p className="text-2xl">{title}</p>
+    </Link>
   );
 };
 
