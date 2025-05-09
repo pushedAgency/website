@@ -13,7 +13,7 @@ const MainPageSelector = () => {
     const fetchImages = async () => {
       try {
         setLoading(true);
-        const res = await fetch("/api/getFolders", { cache: "no-store" });
+        const res = await fetch("/data.json", { cache: "no-store" });
         const response = await res.json();
         setData(response);
       } catch (error) {
