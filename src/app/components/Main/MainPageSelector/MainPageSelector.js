@@ -38,7 +38,7 @@ const MainPageSelector = () => {
             active={activeData}
           />
           <section className="flex justify-center fixed bottom-0 w-screen gap-5 z-100">
-            {titles.map((title, index) => (
+            {titles?.map((title, index) => (
               <Link
                 key={index}
                 href=""

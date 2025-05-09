@@ -28,10 +28,6 @@ const DataDisplayed = ({ data, title }) => {
         </div>
 
         <div className="paddingSection videoParagrapgh">
-          <MuxPlayer
-            playbackId={"YMBmsTyQyH7cIZyS3DIe9s402DGvu7MsJl9b8C3HBae8"}
-            metadata={{ video_title: "Demo Video" }}
-          />
         </div>
       </section>
     </section>
