@@ -155,3 +155,48 @@ mux-player {
   --controls-backdrop-color: rgb(0 0 0 / 30%);
   width: 100%;
 }
+
+.loginDiv {
+  background-color: #304049;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.loginDiv input {
+  padding: 15px;
+  background-color: #1f272f;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: 1px solid #1f272f;
+}
+
+.loginDiv input:hover {
+  border: 1px solid #17e6da;
+}
+
+.loginDiv input:focus,
+.loginDiv input:active {
+  background-color: #304049;
+  border: 1px solid #17e6da;
+}
+
+.error {
+  border: 1px solid red !important;
+}
+
+.loginDiv button {
+  padding: 15px;
+  background-color: #17e6da;
+  border-radius: 10px;
+  color: #181818;
+  border: 1px solid #17e6da;
+}
+
+.loginDiv button:hover {
+  cursor: pointer;
+  background-color: #1f272f;
+  color: white;
+  border: 1px solid #17e6da;
+}
