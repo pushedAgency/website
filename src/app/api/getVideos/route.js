@@ -22,7 +22,7 @@ export async function GET() {
         id: video.id,
         title: video?.meta?.title || 'Untitled',
         playback_id: video?.playback_ids?.[0]?.id || null,
-        external_id: video?.meta?.external_id || null, // Incluir external_id
+        external_id: video?.meta?.external_id || null,
       }));
 
     return NextResponse.json({ videos });

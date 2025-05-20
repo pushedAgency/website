@@ -25,7 +25,7 @@ const DataReader = () => {
   }, []);
 
   console.log(data);
-  return <div>DataReader</div>;
+  return <div></div>;
 };
 
 export default DataReader;

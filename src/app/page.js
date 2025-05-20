@@ -1,12 +1,12 @@
 import MainPageSelector from "@/app/components/Main/MainPageSelector/MainPageSelector";
-import VideoMuxPlayer from "@/app/components/Main/VideoMuxPlayer/VideoMuxPlayer";
-import DataReader from "./components/Main/MainPageSelector/DataReader";
+import VideoComponentLine from "./components/Main/VideoComponentLine/VideoComponentLine";
+import VideoMuxPlayer from "./components/Main/VideoMuxPlayer/VideoMuxPlayer";
+
 
 export default function Home() {
   return (
     <main className="">
       <MainPageSelector />
-      <DataReader />
     </main>
   );
 }

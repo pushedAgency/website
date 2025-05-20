@@ -1,17 +1,33 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtonComponentLine from "@/app/components/Main/ButtonComponentLine/ButtonComponentLine";
-import MuxPlayer from "@mux/mux-player-react";
+import Link from "next/link";
+import Image from "next/image";
 
 const DataDisplayed = ({ data, title }) => {
+  const [currentPlaybackId, setCurrentPlaybackId] = useState(
+    data?.[0]?.playbackId
+  );
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/getVideoToken?playbackId=${data.playbackId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al obtener token");
+        return res.json();
+      })
+      .then((data) => setToken(data.token))
+      .catch((err) => console.error("Error fetching token:", err));
+  }, [data.playbackId]);
+
   return (
     <section>
       <section className="headerSection paddingSection">
         <h1 className="font-extrabold text-4xl">📚 {title}</h1>
       </section>
 
-      <section className="gridContainer">
+      <section className="flex">
         <div className="moduleContent paddingSection">
           <p className="font-bold text-2xl accent w-fit">Contenidos</p>
 
@@ -19,19 +35,37 @@ const DataDisplayed = ({ data, title }) => {
             Parrafo breve de descripción de contenido lorem ipsum bla bla bla.
           </p>
 
-          {data?.map((videoData, index) => (
-            <div key={index}>
-              <ButtonComponentLine title={videoData.filename} />
-              <hr />
-            </div>
-          ))}
+          <div className="">
+            {data?.map((videoData, index) => (
+              <div key={index}>
+                <ButtonComponentLine
+                  title={videoData.filename}
+                  src={videoData.signedId}
+                  onClick={() => setCurrentPlaybackId(videoData.playbackId)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="paddingSection videoParagrapgh">
-          <MuxPlayer
-            playbackId={"YMBmsTyQyH7cIZyS3DIe9s402DGvu7MsJl9b8C3HBae8"}
-            metadata={{ video_title: "Demo Video" }}
-          />
+        <div className="videoParagrapgh gap-2">
+          <div className="">
+            {data?.map((videoData, index) => (
+              <Link key={index} href={`/singleVideo/${videoData.signedId}`} className="videoComponentLineDiv">
+                <div className="videoComponentLine flex items-center gap-5">
+                  <Image
+                    src={`https://image.mux.com/${videoData.playbackId}/thumbnail.webp?"`}
+                    alt="Icon Play Button"
+                    width={1080}
+                    height={1080}
+                    className="borderImg videoThumbnail"
+                    priority
+                  />
+                  <h3 className="text-xl">{videoData.filename}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </section>

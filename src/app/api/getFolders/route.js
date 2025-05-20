@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-export const runtime = 'nodejs'; // 👈 Asegura que se use Node.js
+export const runtime = 'nodejs';
 
 export async function GET(req) {
   try {
@@ -33,15 +33,11 @@ export async function GET(req) {
             const fileContent = fs.readFileSync(fullPath, 'utf-8');
             const json = JSON.parse(fileContent);
 
-            const status = json?.status || null;
-            const title = json?.title || null;
-            const playbackId = json?.providerMetadata?.mux?.playbackId || null;
+            const assetId = json?.providerMetadata?.mux?.assetId || null;
 
             results.push({
               filename: item.replace('.mov.json', ''),
-              status,
-              title,
-              playbackId
+              assetId,
             });
           } catch (err) {
             console.warn(`Error parsing JSON file ${item}:`, err.message);

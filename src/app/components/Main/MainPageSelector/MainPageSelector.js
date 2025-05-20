@@ -42,7 +42,9 @@ const MainPageSelector = () => {
               <Link
                 key={index}
                 href=""
-                className={`bottomSection ${activeData === index ? "activeBottom" : ""}`}
+                className={`bottomSection ${
+                  activeData === index ? "activeBottom" : ""
+                }`}
                 onClick={(e) => {
                   e.preventDefault();
                   setActiveData(index);
