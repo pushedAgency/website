@@ -1,12 +1,12 @@
+import React from "react";
 import MainPageSelector from "@/app/components/Main/MainPageSelector/MainPageSelector";
-import VideoComponentLine from "./components/Main/VideoComponentLine/VideoComponentLine";
-import VideoMuxPlayer from "./components/Main/VideoMuxPlayer/VideoMuxPlayer";
 
-
-export default function Home() {
+const page = () => {
   return (
     <main className="">
       <MainPageSelector />
     </main>
   );
-}
+};
+
+export default page;

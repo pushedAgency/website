@@ -9,17 +9,6 @@ const DataDisplayed = ({ data, title }) => {
   const [currentPlaybackId, setCurrentPlaybackId] = useState(
     data?.[0]?.playbackId
   );
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/getVideoToken?playbackId=${data.playbackId}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al obtener token");
-        return res.json();
-      })
-      .then((data) => setToken(data.token))
-      .catch((err) => console.error("Error fetching token:", err));
-  }, [data.playbackId]);
 
   return (
     <section>

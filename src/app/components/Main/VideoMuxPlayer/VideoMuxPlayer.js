@@ -48,6 +48,7 @@ export default function VideoMuxPlayer({ id }) {
             streamType="on-demand"
             autoPlay={false}
             accent-color="#17e6da"
+            className="mt-5"
           />
         ) : (
           <div>No video available.</div> // Fallback if no token and no error
