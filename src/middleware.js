@@ -28,19 +28,8 @@ export async function middleware(req) {
   // Obtiene el valor de la cookie 'authenticated'
   const isAuthenticated = req.cookies.get('authenticated')?.value;
 
-  // --- Logs de depuración (aparecerán en tu terminal) ---
-  console.log(`[Middleware] Ruta solicitada: ${pathname}`);
-  console.log(`[Middleware] ¿Es página de login?: ${isLoginPage}`);
-  console.log(`[Middleware] ¿Es API de login?: ${isApiLogin}`); // NUEVO LOG
-  console.log(`[Middleware] ¿Es ruta raíz?: ${isRootPath}`);
-  console.log(`[Middleware] ¿Está en carpeta protegida?: ${isWithinProtectedFolder}`);
-  console.log(`[Middleware] ¿Debería estar protegida?: ${shouldBeProtected}`);
-  console.log(`[Middleware] ¿Autenticado (cookie)?: ${isAuthenticated === 'true' ? 'Sí' : 'No'}`);
-  // ----------------------------------------------------
-
   // 1. Si la ruta es una de las permitidas (como /login o /api/login), siempre permite el acceso
   if (allowedPaths.includes(pathname)) {
-    console.log(`[Middleware] Ruta "${pathname}" es permitida. Permitiendo acceso.`);
     return NextResponse.next();
   }
 
@@ -48,19 +37,14 @@ export async function middleware(req) {
   if (shouldBeProtected) {
     // Y el usuario NO está autenticado
     if (isAuthenticated !== 'true') {
-      console.log(`[Middleware] Acceso denegado a "${pathname}". Redirigiendo a /login.`);
       const url = req.nextUrl.clone();
       url.pathname = '/login';
       url.searchParams.set('redirect', pathname);
       return NextResponse.redirect(url);
     }
-    // Si el usuario SÍ está autenticado y la ruta debería estar protegida
-    console.log(`[Middleware] Usuario autenticado. Permitiendo acceso a "${pathname}".`);
     return NextResponse.next();
   }
 
-  // 3. Para todas las demás rutas (que no son protegidas y no son el login), permite el acceso normal
-  console.log(`[Middleware] Ruta "${pathname}" no protegida. Permitiendo acceso.`);
   return NextResponse.next();
 }
 

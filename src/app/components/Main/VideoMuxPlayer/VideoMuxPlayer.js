@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
+import Image from "next/image";
 import "@mux/mux-player/themes/classic";
 
 export default function VideoMuxPlayer({ id }) {
@@ -18,8 +19,12 @@ export default function VideoMuxPlayer({ id }) {
       try {
         const res = await fetch(`/api/getVideoToken?playbackId=${playbackId}`);
         if (!res.ok) {
-          const errorData = await res.json().catch(() => ({ message: 'Unknown error' }));
-          throw new Error(errorData.message || `HTTP error! status: ${res.status}`);
+          const errorData = await res
+            .json()
+            .catch(() => ({ message: "Unknown error" }));
+          throw new Error(
+            errorData.message || `HTTP error! status: ${res.status}`
+          );
         }
         const data = await res.json();
         setToken(data.token);
@@ -36,11 +41,22 @@ export default function VideoMuxPlayer({ id }) {
 
   return (
     <div className="flex items-center justify-center w-screen">
-      <div className="w-2/3">
+      <div className="w-2/3 h-full">
         {loading ? (
-          <div>Loading video...</div>
+          <div className="flex w-full justify-center items-center">
+            <Image
+              src={"/images/loading.gif"}
+              alt="Loading"
+              width={50}
+              height={50}
+              className="mt-10 opacity-50"
+              priority
+            />
+          </div>
         ) : error ? (
-          <div className="text-red-500">Error: {error}. Please try again later.</div>
+          <div className="text-red-500">
+            Error: {error}. Please try again later.
+          </div>
         ) : token ? (
           <MuxPlayer
             playbackId={playbackId}
@@ -51,7 +67,9 @@ export default function VideoMuxPlayer({ id }) {
             className="mt-5"
           />
         ) : (
-          <div>No video available.</div> // Fallback if no token and no error
+          <div className="flex w-full justify-center items-center">
+            <p>No video available</p>
+          </div>
         )}
       </div>
     </div>

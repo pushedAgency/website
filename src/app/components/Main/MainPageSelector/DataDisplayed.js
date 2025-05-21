@@ -13,7 +13,7 @@ const DataDisplayed = ({ data, title }) => {
   return (
     <section>
       <section className="headerSection paddingSection">
-        <h1 className="font-extrabold text-4xl">📚 {title}</h1>
+        <h1 className="font-extrabold text-2xl">📚 {title}</h1>
       </section>
 
       <section className="flex">
