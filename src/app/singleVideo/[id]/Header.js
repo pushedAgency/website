@@ -34,7 +34,7 @@ const Header = ({ id }) => {
         for (const categoria in data) {
           const elementos = data[categoria];
           const encontrado = elementos.find(
-            (item) => item.signedId === signedIdBuscado
+            (item) => item.playbackId === signedIdBuscado
           );
           if (encontrado) {
             return { categoria, ...encontrado };

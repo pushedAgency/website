@@ -26,6 +26,13 @@ export async function GET(req) {
 
     // Buscar por tipo de policy
     const publicId = playback.find((item) => item.policy === "public")?.id || null;
+
+    if (publicId === null) {
+            const playbackId = await Video.Assets.createPlaybackId(assetId, {
+              policy: "public", // o 'public'
+            });
+          }
+
     const signedId = playback.find((item) => item.policy === "signed")?.id || null;
 
     return NextResponse.json({ publicId, signedId });

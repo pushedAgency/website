@@ -37,7 +37,7 @@ const MainPageSelector = () => {
             title={titles[activeData]}
             active={activeData}
           />
-          <section className="flex justify-center fixed bottom-0 w-screen gap-5 z-100">
+          <section className="flex overflow-x-auto whitespace-nowrap fixed bottom-0 w-screen gap-5 z-100 px-4">
             {titles?.map((title, index) => (
               <Link
                 key={index}
@@ -50,7 +50,9 @@ const MainPageSelector = () => {
                   setActiveData(index);
                 }}
               >
-                <h1 className="font-bold text-xl">📚 {title}</h1>
+                <h1 className="font-bold text-xl whitespace-nowrap overflow-hidden text-ellipsis">
+                  📚 {title}
+                </h1>
               </Link>
             ))}
           </section>
