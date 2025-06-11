@@ -44,7 +44,6 @@ const Header = ({ id }) => {
       }
 
       const resultadoEncontrado = findSignedId(data, id);
-      console.log("Encontrado:", resultadoEncontrado);
       setResultado(resultadoEncontrado);
     }
   }, [data, id, loading]);

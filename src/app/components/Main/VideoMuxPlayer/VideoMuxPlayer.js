@@ -6,49 +6,50 @@ import Image from "next/image";
 import "@mux/mux-player/themes/classic";
 
 export default function VideoMuxPlayer({ id }) {
-  const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const playbackId = id;
 
-  /*useEffect(() => {
-    const fetchVideoToken = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await fetch(`/api/getVideoToken?playbackId=${playbackId}`);
-        if (!res.ok) {
-          const errorData = await res
-            .json()
-            .catch(() => ({ message: "Unknown error" }));
-          throw new Error(
-            errorData.message || `HTTP error! status: ${res.status}`
-          );
-        }
-        const data = await res.json();
-        setToken(data.token);
-      } catch (err) {
-        console.error("Error fetching token:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const handleLoadedMetadata = () => {
+    setIsLoading(false);
+  };
 
-    fetchVideoToken();
-  }, [playbackId]);*/
+  const handleError = (event) => {
+    console.error("Mux Player error:", event);
+    setError("No se pudo cargar el video.");
+    setIsLoading(false);
+  };
 
   return (
     <div className="flex items-center justify-center w-screen">
       <div className="w-2/3 h-full">
-        
-          <MuxPlayer
-            playbackId={playbackId}
-            streamType="on-demand"
-            autoPlay={false}
-            accent-color="#17e6da"
-            className="mt-5"
-          />
+        {isLoading && (
+          <div className="flex items-center justify-center h-48 animate-pulse">
+            <Image
+              src={`/images/loading.gif`}
+              alt="Loading Button"
+              width={100}
+              height={100}
+            />
+          </div>
+        )}
+
+        {error && (
+          <div className="text-red-500 text-center mt-4">
+            <p>{error}</p>
+          </div>
+        )}
+
+        <MuxPlayer
+          playbackId={playbackId}
+          streamType="on-demand"
+          autoPlay={false}
+          accent-color="#17e6da"
+          className={`mt-5 ${isLoading ? "hidden" : "block"}`}
+          onLoadedMetadata={handleLoadedMetadata}
+          onError={handleError}
+        />
       </div>
     </div>
   );

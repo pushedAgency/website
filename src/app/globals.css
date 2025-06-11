@@ -200,3 +200,29 @@ mux-player {
   color: white;
   border: 1px solid #17e6da;
 }
+
+.styleResponsive{
+  display: none;
+}
+
+.styleNotResponsive{
+  display: block;
+}
+
+@media screen and (max-width: 700px) {
+  .styleNotResponsive{
+    display: none;
+  }
+
+  .styleResponsive{
+    display: block;
+    color: #17e6da;
+    background-color: #304049;
+    width: 100svw;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}

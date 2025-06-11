@@ -4,7 +4,13 @@ import MainPageSelector from "@/app/components/Main/MainPageSelector/MainPageSel
 const page = () => {
   return (
     <main className="">
-      <MainPageSelector />
+      <div className="styleNotResponsive">
+        <MainPageSelector />
+      </div>
+
+      <div className="styleResponsive">
+        <h1>Esta pagina esta diseñada para verse desde una Computadora</h1>
+      </div>
     </main>
   );
 };
